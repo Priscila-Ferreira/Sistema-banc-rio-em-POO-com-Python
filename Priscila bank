@@ -1,0 +1,45 @@
+import textwrap
+
+def exibir_menu():
+    menu_texto = """\n
+    ================ MENU ================
+    [d]\tDepositar
+    [s]\tSacar
+    [e]\tExtrato
+    [q]\tSair
+    => """
+    return input(textwrap.dedent(menu_texto))
+
+def validar_operacao_invalida():
+    print("Operação inválida, por favor selecione uma opção válida.")
+
+def sacar(saldo):
+    valor = float(input("Informe o valor do saque: "))
+    if valor > saldo:
+        print("Saldo insuficiente!")
+    elif valor <= 0:
+        print("Valor inválido!")
+    else:
+        saldo -= valor
+        print(f"Saque de R$ {valor:.2f} realizado com sucesso!")
+    return saldo
+
+def main():
+    saldo = 1000  # Saldo inicial
+    while True:
+        opcao = exibir_menu()
+        if opcao == "d":
+            valor_deposito = float(input("Informe o valor do depósito: "))
+            saldo += valor_deposito
+            print(f"Depósito de R$ {valor_deposito:.2f} realizado com sucesso!")
+        elif opcao == "s":
+            saldo = sacar(saldo)
+        elif opcao == "e":
+            print(f"Seu saldo atual é R$ {saldo:.2f}")
+        elif opcao == "q":
+            print("Saindo do programa...")
+            break
+        else:
+            validar_operacao_invalida()
+
+main()
